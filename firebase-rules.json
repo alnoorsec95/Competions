@@ -1,0 +1,22 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "scores": {
+      ".read": true,
+      ".indexOn": ["points"],
+      "$id": {
+        ".write": "!data.exists() && newData.exists()",
+        ".validate": "$id.length <= 120 && newData.hasChildren(['name','points','correct','total','ts'])",
+        "name":    { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 40" },
+        "points":  { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 300" },
+        "correct": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 50" },
+        "total":   { ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 50" },
+        "cat":     { ".validate": "newData.isString() && newData.val().length <= 40" },
+        "ts":      { ".validate": "newData.isNumber()" },
+        "icon":    { ".validate": "newData.isString() && newData.val().length <= 16" },
+        "$other":  { ".validate": false }
+      }
+    }
+  }
+}
